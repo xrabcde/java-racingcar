@@ -7,15 +7,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Cars {
-    private final List<Car> carList = new ArrayList<>();
+    private final List<Car> carList;
 
     public Cars(List<String> carNameList) {
         checkOverlappedNames(carNameList);
         checkNull(carNameList);
-        carNameList.stream()
-                .forEach(carName -> carList.add(new Car(carName)));
+        this.carList = carNameList.stream()
+                .map(Car::new)
+                .collect(Collectors.toList());
     }
 
     private void checkOverlappedNames(List<String> nameCandidates) {
