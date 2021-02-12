@@ -18,25 +18,25 @@ public class Cars {
                 .forEach(carName -> carList.add(new Car(carName)));
     }
 
-    private static int findMaxPosition(List<Car> carList) {
-        int maxPosition = 0;
-        for (Car car : carList) {
-            maxPosition = Math.max(maxPosition, car.getPosition());
-        }
-        return maxPosition;
-    }
-
-    private static void checkOverlappedNames(List<String> nameCandidates) {
+    private void checkOverlappedNames(List<String> nameCandidates) {
         Set<String> targetSet = new HashSet<>(nameCandidates);
         if (nameCandidates.size() != targetSet.size()) {
             RacingCarError.overlapped();
         }
     }
 
-    private static void checkNull(List<String> nameCandidates) {
+    private void checkNull(List<String> nameCandidates) {
         if (nameCandidates.size() == 0) {
             RacingCarError.nullCar();
         }
+    }
+
+    private int findMaxPosition() {
+        int maxPosition = 0;
+        for (Car car : this.carList) {
+            maxPosition = Math.max(maxPosition, car.getPosition());
+        }
+        return maxPosition;
     }
 
     public void processOneTurn() {
@@ -48,7 +48,7 @@ public class Cars {
     }
 
     public String findWinners() {
-        int maxPosition = findMaxPosition(this.carList);
+        int maxPosition = findMaxPosition();
         List<String> winnerList = new ArrayList<>();
         carList.stream()
                 .filter(carElement -> (carElement.checkPosition(maxPosition)))
