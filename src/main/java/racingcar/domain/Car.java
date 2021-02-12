@@ -10,12 +10,12 @@ public class Car {
     private int position;
 
     public Car(String name) {
-        checkNameLength(name);
+        validateNameLength(name);
         this.name = name;
         position = INITIAL_POSITION;
     }
 
-    private static void checkNameLength(String nameCandidate) {
+    private static void validateNameLength(String nameCandidate) {
         checkUpperLimit(nameCandidate);
         checkLowerLimit(nameCandidate);
     }
@@ -49,7 +49,7 @@ public class Car {
         return this.position;
     }
 
-    public boolean checkPosition(int position) {
+    public boolean isMaxPosition(int position) {
         return this.position == position;
     }
 }
