@@ -19,9 +19,10 @@ public class RacingCarController {
         RacingCarController.scanner = scanner;
     }
 
-    public static void checkTurns(String turnCandidate) {
+    public static int checkTurns(String turnCandidate) {
         int integerCandidate = checkInteger(turnCandidate);
         checkNegative(integerCandidate);
+        return integerCandidate;
     }
 
     private static int checkInteger(String turnCandidate) {
@@ -50,7 +51,7 @@ public class RacingCarController {
     public void receiveTurns() {
         RacingCarView.turnNumberInput();
         String turnsInput = scanner.nextLine();
-        int intTurns = Integer.parseInt(turnsInput);
+        int intTurns = checkTurns(turnsInput);
         this.turns = intTurns;
     }
 
@@ -59,8 +60,7 @@ public class RacingCarController {
         for (int i = 0; i < this.turns; i++) {
             cars.processOneTurn();
             List<Car> carList = cars.getList();
-            carList.stream()
-                    .forEach(RacingCarView::displayPosition);
+            carList.forEach(RacingCarView::displayPosition);
             RacingCarView.displayTurnInterval();
         }
     }
